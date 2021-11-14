@@ -74,23 +74,31 @@
 ### Три фундаментальные концепции:
 - **PROJECTION** *выбор столбцов из таблицы*
 - **SELECTION** *выбор строк из таблицы*
-- **JOINING** *объединение таблиц*
+- **JOINING** *объединение таблицы*
 
 ### Базовый синтаксисис:
-```SELECT * FROM table;```
+```SQL
+SELECT * FROM table;
+```
 
-```SELECT column(s) FROM table;```
+```SQL
+SELECT column(s) FROM table;
+```
 
 ### *SELECT statemnt не меняет данные в БД.*
 ### ОПЕРАТОР *(ключевое слово)* DISTINCT
 DISTINCT - выводит уникальные строки из столбца
 #### Синтаксис:
-```SELECT DISTINCT column(s) FROM table;```
+```SQL
+SELECT DISTINCT column(s) FROM table;
+```
 
 Если в команде передать несколько столбцов, то DISTINCT выведет уникальные сочетания этих столбцов
 
 ### Выражения. Expressions.
-```SELECT column(s), expression(s) FROM table;```
+```SQL
+SELECT column(s), expression(s) FROM table;
+```
 
 С числовыми данными в столбцах можно проводить арифметические операции.
 
@@ -100,15 +108,84 @@ DISTINCT - выводит уникальные строки из столбца
 Alias - альтернативное имя для столбца или целого выражения.
 * при помощи ключевого слова **AS**, либо после пробелом после выражения/столбца.*
 
-```SELECT column(s) as alias, expression(s) alias2 FROM table;```
+```SQL
+SELECT column(s) as alias, expression(s) alias2 FROM table;
+```
 
 ### Таблица DUAL
 Таблица DUAL - пустая таблица, которую можно использовать для вывода своих выражений.
 ### Оператор q
 Чтобы одинарная кавычка не ломала строку, можно использовать два метода:
-- Поставить одинарную кавычку два раза:'
-- Использовать операток Quote (q)
+- Поставить одинарную кавычку два раза: ```''```
+- Использовать оператор Quote (q)
 
-```SELECT q'<It's my life> from dual;```
+```SQL
+SELECT q'<It's my life> from dual;
+```
 Символ **<** в данном случае используется как delimiter (разделитель). Вместо него можно использовать другой символ, например **$**
 ## <a name="3"></a> Selection, операторы, ORDER BY
+###Концепция SELECTION
+SELECTION Restriction - ограничение в выводе строк
+
+Оператор **WHERE** позваляет выбрать строки соответствующие условию *condition*
+
+Изученный синтаксис:
+```SQL
+SELECT *|{DISTINCT column(s) alias, expressions(s)}
+FROM table 
+WHERE condition(s);
+```
+### Математические операторы сравнения
+```SQL
+=
+>
+<
+>=
+<=
+!=, <>
+```
+### Другие операторы сравнения
+```SQL
+BETWEEN (value1, value2)
+IN (list)
+IS NULL ()
+LIKE (sting, _, %)
+```
+### Логические операторы
+```SQL
+AND
+OR
+NOT
+```
+###Приоритет операторов
+|Приоритетность| Оператор |
+| :----------: |------------------|
+|1|```()```|
+|2|```/ *```|
+|3|```+ -```|
+|4|&#124;&#124;|
+|5|```=, >, <, >=, <=```|
+|6|```[NOT] LIKE, IS [NOT] NULL, [NOT] IN```|
+|7|```[NOT] BETWEEN```|
+|8|```!= <>```|
+|9|```NOT```|
+|10|```AND```|
+|11|```OR```|
+###ORDER BY
+Сортирует вывод SELECT
+```sql
+ORDER BY {col(s) | expr(s) | numeric_position}
+{ASC|DESC} {NULLS FIRST|LAST};
+```
+Пример: 
+```SQL
+SELECT first_name, salary FROM employees
+ORDER by salary;
+```
+Ключ `ASC` - стандартная сортировка от меньшего к большему *(можно не писать)*
+
+Ключ `DESC` - сортировка от большего к меньшему
+
+```NULLS FIRST/LAST``` - определяет положение строк содержащих NULL в отсортированном выводе
+
+Сортировать можно по нескольким строкам.
