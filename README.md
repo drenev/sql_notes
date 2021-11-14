@@ -68,7 +68,9 @@
 ### DESCRIBE
 Команда DESCRIBE позволяет получить служебную информацию о таблице: о колонках и их типах данных
 
-**DESC**RIBE SCHEMA.**TABLE_NAME**
+```SQL
+DESCRIBE SCHEMA.TABLE_NAME
+```
 
 ## <a name="2"></a> Знакомство с SELECT
 ### Три фундаментальные концепции:
@@ -227,7 +229,7 @@ ORDER by salary;
       - Арифметические операции с датами: `Date-Date=Number`, `Date-Number=Date`, `Date+Number=Date`, где **Number** - количество дней, может быть нецелым. Складывать, умножать и делить даты нельзя
       - `MONTHS_BETWEEN(start_date, end_date)` *возвращает количество месяцев между датами (может быть нецелым). чтобы узнать количество дней, нужно умножить на **31**(стандарт **Oracle**)*
       - `ADD_MONTHS(date, number_of_months)` *добавляет **number_of_months** к **date**. при отрицательном **number_of_months**, месяца будут отниматься. **number_of_months** не может быть дробным*
-      - `NEXT_DATE(date, day_of_the_week)` *возвращает ближайший **day_of_the_week[1;7]** к **date**. **day_of_the_week** можно указать словом, каким конкретно, зависит от формата дат в системе(можно посмотреть в таблице `nls_session_parameters`)*
+      - `NEXT_DAY(date, day_of_the_week)` *возвращает ближайший **day_of_the_week[1;7]** к **date**. **day_of_the_week** можно указать словом, каким конкретно, зависит от формата дат в системе(можно посмотреть в таблице `nls_session_parameters`)*
       - `LAST_DAY(date)` *возвращает последний день месяца*
       - `ROUND(date, date_precision_format)` *округление для дат. **date_precision_format** может быть `CC`- век; `YYYY`- год; `Q`- четверть, `MM`- месяц; `W`- неделя; `DD`- день; `HH`- час; `MI`- минута. **по умолчанию округляет до дня `DD`***
       - `TRUNC(date, date_precision_format)` *то же, что ROUND, только не округляет, а отсекает дату*
