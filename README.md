@@ -239,6 +239,12 @@ ORDER by salary;
    - полагаться на неявное преобразование данных не стоит -  оно работает не всегда. хорошим тоном считается всегда использовать функции конвертации
    - **implicitly** - неявное, **explicitly** - явное
    - у дат в стандартном виде разделитель, **separator**, может быть почти любым символом: `'05*09/19'= 05.09.19`
-   - `TO_CHAR(number, format_mask, nls_parameters)=T`
-   - `TO_DATE`
-   - `TO_NUMBER`
+   - Мы будем изучать три вида этих функций:
+     - `TO_CHAR`
+     - `TO_DATE`
+     - `TO_NUMBER`
+#### TO_CHAR *число -> текст*
+```sql
+TO_CHAR(number, format_mask, nls parameters)=T
+```
+
