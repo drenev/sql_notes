@@ -217,7 +217,7 @@ ORDER by salary;
       - `CONCAT (str1, str2...)` *то же что и ||*
       - `LENGTH (str)` *возвращает длину строки*
       - `LPAD и RPAD(str, n, p)` *добавляют символ **p** к началу, либо концу строки столько раз, чтобы итоговая длина строки была равна **n***
-      - `TRIM({trailing|leading|both} trimstring from str)` *срезает символ с начала|с конца|**и с начала и с конца**(по умолчанию). trimstring - 1 символ, который нужно срезать, необязательный параметр*
+      - `TRIM({leading|trailing|both} trimstring from str)` *срезает символ с начала|с конца|**и с начала и с конца**(по умолчанию). trimstring - 1 символ, который нужно срезать, необязательный параметр*
       - `INSTR(str, search_string, start_position, Nth_occurence)` *возвращает номер позиции **search_string** в **str**. может начинать поиск с **start_position**(number). **Nth_occurence**(number) позволяет найти второе и последующие появления **search_string** в тексте (по умолчанию функция возвращает номер первого появления)*
       - `SUBSTR(str, start_position, count_of_characters)` *возвращает часть **str**, начиная с **start_position**, длиной в **count_of_characters**, либо до конца строки(по умолчанию). если start_position>LENTH(str), то функция вернёт NULL. если **start_position** отрицательное, то отсчёт будет идти с права на лево*
       - `REPLACE(str, search_item, replacement_item)` *заменяет **search_item** в **str** на **replacement_item**, либо **на пустоту**(по умолчанию)*
@@ -365,4 +365,4 @@ END
 ```
 Где `cond` - какое-то логическое выражение, если *condN=true* кейс вернёт *iftrueN*
 
-*Как и DECODE, возвращает результат первого совпадения*
+*Как и DECODE, возвращает результат только первого совпадения*
