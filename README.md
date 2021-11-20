@@ -1,4 +1,4 @@
-## Конспект по Oracle SQL
+# Конспект по Oracle SQL
 *Этот конспект основан на видеокурсе Заура Трегулова*
 
 ### Главы
@@ -322,7 +322,7 @@ select TO_DATE('11:11 20-Nov-2021', 'HH24:MI DD-Mon-yyyy') from dual;
 *у функции **TO_DATE** есть *modifier* `fx`. если указать его в начале маски - то текст не преобразуется в дату, без строгого соответствия маске*
 
 #### TO_NUMBER *текст -> число*
-```sql
+```oraclesqlplus
 TO_NUMBER(text, format_mask, nls_parameters)
 ```
 В этой функции нужно использовать те же маски, что мы использовали в **TO_CHAR *число -> текст***
@@ -344,7 +344,7 @@ Nested *(вложенные)* single-row функции могут быть лю
      - **Searched CASE**
      
 #### Simple CASE
-```sql
+```oraclesqlplus
 CASE expr
 WHEN comp1 THEN iftrue1
 ...
@@ -355,7 +355,7 @@ END
 *то же самое, что и DECODE, только есть во всех диалектах SQL.*
 
 #### Searched CASE
-```sql
+```oraclesqlplus
 CASE
 WHEN cond1 THEN iftrue1
 ...
