@@ -366,3 +366,82 @@ END
 Где `cond` - какое-то логическое выражение, если *condN=true* кейс вернёт *iftrueN*
 
 *Как и DECODE, возвращает результат только первого совпадения*
+
+## <a name="6"></a> GROUP (Multiple-Row)  функции
+Работают с агрегированной информацией, input - много строк, output - всегда одна
+1. `COUNT`
+2. `SUM`
+3. `AVG`
+4. `MAX`
+5. `MIN`
+
+В одном запросе нельзя выводить GROUP функции, и строки
+
+### COUNT
+```sql
+COUNT({ * |{DISTINCT|ALL}expression})
+```
+Считает количество строк, в столбце/группе
+
+**Пример запроса:**
+```sql
+select COUNT(*) from employees where salary>5000;
+```
+Если в качестве параметра функции будет столбец, то *COUNT* не посчитает строки, содержащие *NULL*
+
+### SUM
+```SQL
+SUM({DISTINCT|ALL}expression)
+```
+Складывает все значения в столбце/группе. Работает только для чисел. Складывает только *IS NOT NULL* значения
+
+### AVG
+```SQL
+AVG({DISTINCT|ALL}expression)
+```
+Среднее арифметическое по столбцу/группе. Работает только для чисел. Игнорирует *NULL* значения.
+
+### MAX и MIN
+```SQL
+MAX({DISTINCT|ALL}expression)
+```
+Ищут максимальное/минимальное значение в стобце/группе. Работает как для чисел, так и для дат и строк.
+
+## GROUP BY
+*GROUP BY* группирует вывод по какому-то атрибуту, например по столбцу *job_id*
+
+Изученный синтаксис:
+```sql
+SELECT *|{DISTINCT column(s) alias, expression(s)
+alias, group_f-on(s)(col|expr alias), }
+FROM table
+WHERE condition(s)
+GROUP BY {col(s)|expr(s)}
+ORDER BY {col(s)| expr(s)| numeric position}
+{ASC|DESC} {NULLS FIRST|LAST};
+```
+***Пример:***
+```sql
+select department_id, COUNT(*) from employees group by department_id
+order by 1,2;
+```
+*Выведет только департаменты, и количество работников в них*
+
+В сгруппированном запросе можно в качестве атрибутов использовать только атрибут группировки и групповые функции. Просто строки вывести нельзя
+
+Группировать можно по нескольким атрибутам.
+### HAVING
+Позволяет ограничить вывод строк, похож по функционалу на *WHERE*, но работает с *GROUP* функциями
+
+***Пример:***
+```sql
+select department_id, count(*)as from employees
+where LENGTH(first_name)>4
+group by department_id
+HAVING count(*)>3
+order by department_id;
+```
+*WHERE* - отсеивает строки, *HAVING* - отсеивает целые группы, которые не удовлетворяют условию
+
+### NESTED GROUP функции
+В отличии от **SINGLE-ROW** функций, **ГРУППОВЫЕ** функции могут быть вложены друг в друга с глубиной не более 2
